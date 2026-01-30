@@ -1,0 +1,516 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  scroll-snap-type: y mandatory;
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none;
+}
+
+/* BASE */
+body {
+  background: black;
+  color: silver;
+  font-family: Orbitron, sans-serif;
+  font-size: 20px;
+  overflow-x: hidden;
+}
+
+/* ================= STARFIELD ================= */
+.starfield {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(2px 2px at 80% 40%, white, transparent),
+    radial-gradient(2px 2px at 50% 70%, white, transparent),
+    radial-gradient(1px 1px at 10% 80%, white, transparent),
+    radial-gradient(1px 1px at 90% 10%, white, transparent);
+  animation: stars 20s linear infinite;
+  z-index: -3;
+  opacity: 0.4;
+}
+
+@keyframes stars {
+  from { transform: translateY(0); }
+  to { transform: translateY(1000px); }
+}
+
+/* ================= GRID ================= */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(800px) rotateX(65deg);
+  animation: gridMove 20s linear infinite;
+  z-index: -2;
+  opacity: 0.25;
+}
+
+@keyframes gridMove {
+  to { background-position: 0 1000px, 1000px 0; }
+}
+
+/* ================= CURSOR ================= */
+.cursor-glow {
+  width: 18px;
+  height: 18px;
+  border: 2px solid silver;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 0 20px silver;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 14px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+
+.nav-logo {
+  font-weight: bold;
+  letter-spacing: 3px;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links span {
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-links span:hover {
+  color: white;
+  text-shadow: 0 0 12px silver;
+}
+
+.nav-links span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: silver;
+  transition: 0.3s;
+}
+
+.nav-links span:hover::after {
+  width: 100%;
+}
+
+/* ================= SECTIONS ================= */
+.section {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 120px 20px 80px;
+}
+
+footer {
+  min-height: 100vh;
+  scroll-snap-align: start;
+}
+
+/* ================= HERO ================= */
+.hero {
+  overflow: hidden;
+}
+
+.logo-word {
+  font-size: 6rem;
+  letter-spacing: 6px;
+  position: relative;
+  text-shadow: 0 0 30px silver;
+}
+
+.logo-x {
+  color: white;
+}
+
+/* ROTATION */
+.rotate3d {
+  animation: spin3d 8s linear infinite;
+}
+
+@keyframes spin3d {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+/* ================= GLITCH ================= */
+.glitch::before,
+.glitch::after {
+  content: "STRIVEX";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: white;
+  clip: rect(0,900px,0,0);
+  background: black;
+  overflow: hidden;
+}
+
+.glitch::before {
+  animation: glitchTop 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  animation: glitchBottom 1.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitchTop {
+  0% { clip: rect(0,9999px,0,0); transform: translate(-2px,-2px); }
+  20% { clip: rect(10px,9999px,50px,0); }
+  40% { clip: rect(5px,9999px,20px,0); transform: translate(2px,2px); }
+  60% { clip: rect(30px,9999px,80px,0); }
+  80% { clip: rect(40px,9999px,60px,0); }
+  100% { clip: rect(0,9999px,0,0); }
+}
+
+@keyframes glitchBottom {
+  0% { clip: rect(0,9999px,0,0); transform: translate(2px,2px); }
+  20% { clip: rect(40px,9999px,80px,0); }
+  40% { clip: rect(10px,9999px,30px,0); transform: translate(-2px,-2px); }
+  60% { clip: rect(50px,9999px,90px,0); }
+  80% { clip: rect(20px,9999px,40px,0); }
+  100% { clip: rect(0,9999px,0,0); }
+}
+
+/* ================= HOVER EFFECTS (GLOBAL) ================= */
+.hover-box {
+  transition: 0.4s;
+}
+
+.hover-box:hover {
+  box-shadow: 0 0 40px silver;
+  transform: scale(1.05);
+}
+
+/* ================= VISION ================= */
+.vision-box {
+  border: 1px solid silver;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 700px;
+  text-align: center;
+}
+
+/* ================= FACTS ================= */
+.fact-box {
+  border: 1px solid silver;
+  padding: 30px;
+  border-radius: 18px;
+  max-width: 600px;
+  text-align: center;
+}
+
+/* ================= TEAM ================= */
+.leaders {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  width: 90%;
+}
+
+.leader-card,
+.team-card {
+  border: 1px solid silver;
+  padding: 14px;
+  border-radius: 16px;
+  text-align: center;
+  transition: 0.4s;
+}
+
+.leader-card:hover,
+.team-card:hover {
+  box-shadow: 0 0 35px silver;
+  transform: scale(1.1) rotateY(10deg);
+}
+
+/* ================= FACE ================= */
+.face-glow {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 0 18px rgba(180,180,255,0.6);
+  transition: 0.4s;
+}
+
+.face-glow:hover {
+  filter: brightness(1.2);
+  box-shadow: 0 0 35px rgba(200,200,255,1);
+}
+
+/* ================= TIMELINE ================= */
+.timeline-track {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.timeline-item {
+  border-left: 4px solid silver;
+  padding: 10px 20px;
+  transition: 0.4s;
+}
+
+.timeline-item:hover {
+  transform: translateX(12px);
+  box-shadow: 0 0 25px silver;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  position: relative;
+  padding: 120px 40px 160px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.footer-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 0.15;
+  z-index: -2;
+}
+
+.footer-wave {
+  position: absolute;
+  top: -80px;
+  width: 200%;
+  height: 160px;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2), transparent);
+  animation: waveMove 6s linear infinite;
+}
+
+@keyframes waveMove {
+  to { transform: translateX(-50%); }
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 40px;
+  margin: 40px 0;
+}
+
+.footer-grid > div {
+  transition: 0.4s;
+}
+
+.footer-grid > div:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px silver;
+}
+
+/* ================= SOCIALS ================= */
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.socials a {
+  width: 50px;
+  height: 50px;
+  border: 2px solid silver;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.socials a:hover {
+  background: silver;
+  color: black;
+  box-shadow: 0 0 25px white;
+}
+
+/* ================= CONTACT ================= */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: black;
+  border: 1px solid silver;
+  padding: 10px;
+  color: silver;
+}
+
+.contact-form button {
+  background: silver;
+  color: black;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  box-shadow: 0 0 20px silver;
+}
+/* PROFILE IMAGE GRADIENT FRAME */
+.avatar-wrap {
+  background: linear-gradient(
+    135deg,
+    #777,
+    #444,
+    #999
+  );
+  padding: 6px;
+  border-radius: 14px;
+  display: inline-block;
+  box-shadow: 0 0 25px rgba(180,180,180,0.6);
+  transition: 0.4s;
+}
+
+.avatar-wrap:hover {
+  box-shadow: 0 0 40px rgba(220,220,220,0.9);
+  transform: scale(1.05);
+}
+
+/* keep your existing image style */
+.face-glow {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 18px rgba(180,180,255,0.6);
+}
+/* PROFILE IMAGE GRADIENT FRAME */
+.avatar-wrap {
+  background: linear-gradient(
+    135deg,
+    #777,
+    #444,
+    #999
+  );
+  padding: 6px;
+  border-radius: 14px;
+  display: inline-block;
+  box-shadow: 0 0 25px rgba(180,180,180,0.6);
+  transition: 0.4s;
+}
+
+.avatar-wrap:hover {
+  box-shadow: 0 0 40px rgba(220,220,220,0.9);
+  transform: scale(1.05);
+}
+
+/* keep your existing image style */
+.face-glow {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 18px rgba(180,180,255,0.6);
+}
+/* ===== AVATAR BACKDROP (BEHIND PERSON) ===== */
+.avatar-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.avatar-bg {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle at center,
+    rgba(180,180,180,0.35),
+    rgba(100,100,100,0.15),
+    transparent 70%
+  );
+  filter: blur(20px);
+  z-index: 0;
+  border-radius: 50%;
+}
+
+.face-glow {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== BIO POPUP ===== */
+.bio-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.bio-card {
+  background: rgba(30,30,30,0.9);
+  border: 1px solid silver;
+  border-radius: 20px;
+  padding: 30px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 0 40px silver;
+}
+
+.bio-card h2 {
+  margin-top: 10px;
+}
+
+.bio-card button {
+  margin-top: 20px;
+  padding: 8px 16px;
+  background: silver;
+  border: none;
+  cursor: pointer;
+}
+
+/* bigger avatar in popup */
+.avatar-wrap.big {
+  width: 220px;
+  margin: auto;
+}
